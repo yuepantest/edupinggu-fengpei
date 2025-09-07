@@ -138,12 +138,12 @@
           class="text-all"
           v-model="bankId"
           type="number"
-          name="bankId"
           required
+          name="bankId"
           label="还款账号"
           placeholder="请输入你还款的银行卡号"
           :rules="[
-            { required: ture, message: '请输入你还款的银行卡号' },
+            { required: true, message: '请输入你还款的银行卡号' },
             { pattern: patternbankId, message: '请输入正确的银行卡号' },
           ]"
         />
@@ -231,8 +231,8 @@ export default {
           headers: { requestKey: "fengpei" },
         });
         instance
-          //.post("http://localhost:8081/calculating", formData)
-          .post("http://47.109.33.172:8081/calculating", formData)
+          .post("http://localhost:8081/calculating", formData)
+          //.post("http://47.109.33.172:8081/calculating", formData)
           .then((res) => {
             console.log("res", res);
             if (res.data.code === 1 && res.data.data.num !== 0) {

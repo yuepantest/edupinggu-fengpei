@@ -137,11 +137,10 @@
           v-model="bankId"
           type="number"
           name="bankId"
-          required
           label="还款账号"
           placeholder="请输入你还款的银行卡号"
           :rules="[
-            { required: ture, message: '请输入你还款的银行卡号' },
+            { required: false, message: '请输入你还款的银行卡号' },
             { pattern: patternbankId, message: '请输入正确的银行卡号' },
           ]"
         />
@@ -294,7 +293,7 @@ export default {
       validatorPoints,
       isButtonDisabled,
       bankId,
-      patternbankId: /^[0-9]{16,19}$/,
+      patternbankId: /^$|^\d{16,19}$/,
     };
   },
 };

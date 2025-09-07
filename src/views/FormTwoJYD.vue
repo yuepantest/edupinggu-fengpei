@@ -134,12 +134,12 @@
           class="text-all"
           v-model="bankId"
           type="number"
-          name="bankId"
           required
+          name="bankId"
           label="还款账号"
           placeholder="请输入你还款的银行卡号"
           :rules="[
-            { required: ture, message: '请输入你还款的银行卡号' },
+            { required: true, message: '请输入你还款的银行卡号' },
             { pattern: patternbankId, message: '请输入正确的银行卡号' },
           ]"
         />
