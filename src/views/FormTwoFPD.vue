@@ -231,8 +231,8 @@ export default {
           headers: { requestKey: "fengpei" },
         });
         instance
-          .post("http://localhost:8081/calculating", formData)
-          //.post("http://47.109.33.172:8081/calculating", formData)
+          //.post("http://localhost:8081/calculating", formData)
+          .post("http://47.109.33.172:8081/calculating", formData)
           .then((res) => {
             console.log("res", res);
             if (res.data.code === 1 && res.data.data.num !== 0) {

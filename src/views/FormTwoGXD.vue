@@ -240,13 +240,13 @@ export default {
               loadFlag.value = true;
               setTimeout(() => {
                 loadFlag.value = false;
-                router.push({
-                  name: "FinishGXD",
-                  query: {
-                    ...res.data.data,
-                    ...router.currentRoute._rawValue.query,
-                  },
-                });
+                // router.push({
+                //   name: "FinishGXD",
+                //   query: {
+                //     ...res.data.data,
+                //     ...router.currentRoute._rawValue.query,
+                //   },
+                // });
               }, 30000);
             } else if (res.data.code === 1 && res.data.data.num === 0) {
               //成功无额度
