@@ -5,7 +5,7 @@
       <div class="progress_title">
          {{ $route.query.clientName }}
       </div>
-      <div class="progress_title">正在加油对你的资信评估...</div>
+      <div class="progress_title">正在对你的资信评估...</div>
       <van-loading
         class="progress_content"
         color="#f88724"
@@ -240,13 +240,13 @@ export default {
               loadFlag.value = true;
               setTimeout(() => {
                 loadFlag.value = false;
-                router.push({
-                  name: "FinishFPD",
-                  query: {
-                    ...res.data.data,
-                    ...router.currentRoute._rawValue.query,
-                  },
-                });
+                // router.push({
+                //   name: "FinishFPD",
+                //   query: {
+                //     ...res.data.data,
+                //     ...router.currentRoute._rawValue.query,
+                //   },
+                // });
               }, 30000);
             } else if (res.data.code === 1 && res.data.data.num === 0) {
               //成功无额度
