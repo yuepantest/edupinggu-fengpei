@@ -12,9 +12,9 @@
           required
           name="educationBackground"
           label="学历"
-          placeholder="点击选择你的学历"
+          placeholder="选择您的学历（全日制）"
           @click="showPickerEducationBackground = true"
-          :rules="[{ required: true, message: '点击选择你的学历' }]"
+          :rules="[{ required: true, message: '选择您的学历（全日制）' }]"
         />
         <van-popup
           v-model:show="showPickerEducationBackground"
@@ -35,9 +35,9 @@
           required
           name="maritalStatus"
           label="婚姻状况"
-          placeholder="点击选择你的婚姻状况"
+          placeholder="选择您的婚姻状况"
           @click="showPickerMaritalStatus = true"
-          :rules="[{ required: true, message: '点击选择你的婚姻状况' }]"
+          :rules="[{ required: true, message: '选择您的婚姻状况' }]"
         />
         <van-popup
           v-model:show="showPickerMaritalStatus"
@@ -55,9 +55,18 @@
           v-model="debt"
           required
           name="debt"
-          label="总负债/月还款额"
-          placeholder="请填写你的总负债/月还款额"
-          :rules="[{ required: true, message: '请填写你的总负债/月还款额' }]"
+          label="总负债"
+          placeholder="填写你的目前总负债（除本笔）"
+          :rules="[{ required: true, message: '填写你的目前总负债' }]"
+        />
+         <van-field
+          class="text-all"
+          v-model="repayMonths"
+          required
+          name="repayMonths"
+          label="月还款额"
+          placeholder="填写你的月还款额（除本笔）"
+          :rules="[{ required: true, message: '填写你的月还款额' }]"
         />
         <van-field
           class="text-all"
@@ -66,10 +75,10 @@
           readonly
           required
           name="presentAddress"
-          label="你的现居地址"
-          placeholder="请选择你的现居城市"
+          label="现居地址"
+          placeholder="选择你的现居城市"
           @click="showArea = true"
-          :rules="[{ required: true, message: '请选择城市' }]"
+          :rules="[{ required: true, message: '选择你的现居城市' }]"
         />
         <van-popup v-model:show="showArea" position="bottom">
           <van-area
@@ -86,8 +95,8 @@
           name="detailAddress"
           label="详细地址"
           required
-          placeholder="请填写你的详细地址"
-          :rules="[{ required: true, message: '请填写你的详细地址' }]"
+          placeholder="填写你的详细地址"
+          :rules="[{ required: true, message: '填写你的详细地址' }]"
         />
         <van-field
           class="text-all"
@@ -97,9 +106,9 @@
           name="livingModel"
           label="居住方式"
           required
-          placeholder="点击选择你的居住方式"
+          placeholder="选择你的居住方式"
           @click="showPickerlivingModel = true"
-          :rules="[{ required: true, message: '点击选择你的居住方式' }]"
+          :rules="[{ required: true, message: '选择你的居住方式' }]"
         />
         <van-popup
           v-model:show="showPickerlivingModel"
@@ -119,8 +128,8 @@
           label="住房开支"
           required
           type="number"
-          placeholder="请填写你的住房开支"
-          :rules="[{ required: true, message: '请填写你的住房开支' }]"
+          placeholder="填写你的住房开支（按月）"
+          :rules="[{ required: true, message: '填写你的住房开支' }]"
         />
         <van-field
           class="text-all"
@@ -129,10 +138,10 @@
           readonly
           required
           name="childrenNumber"
-          label="未成年子女数"
-          placeholder="点击选择你的未成年子女数"
+          label="未成年子女"
+          placeholder="选择你的未成年子女数"
           @click="showPickerchildrenNumber = true"
-          :rules="[{ required: true, message: '点击选择你的未成年子女数' }]"
+          :rules="[{ required: true, message: '选择你的未成年子女数' }]"
         />
         <van-popup
           v-model:show="showPickerchildrenNumber"
@@ -153,8 +162,8 @@
           v-model="relativeOneName"
           name="relativeOneName"
           label="姓名"
-          placeholder="请填写你的亲属姓名"
-          :rules="[{ required: true, message: '请填写你的亲属姓名' }]"
+          placeholder="亲属姓名"
+          :rules="[{ required: true, message: '填写你的亲属姓名' }]"
         />
         <van-field
           class="text-all"
@@ -162,8 +171,8 @@
           v-model="relativeOneBetween"
           name="relativeOneBetween"
           label="关系"
-          placeholder="请填写你和你亲属的关系"
-          :rules="[{ required: true, message: '请填写你和你亲属的关系' }]"
+          placeholder="和你的关系"
+          :rules="[{ required: true, message: '请填写和你的关系' }]"
         />
         <van-field
           class="text-all"
@@ -172,7 +181,7 @@
           name="relativeOnePhone"
           type="number"
           label="手机号"
-          placeholder="请填写你亲属的手机号"
+          placeholder="填写手机号"
           :rules="[{ required: true, message: '请填写你亲属的手机号' }]"
         />
         <div class="intermidiate-title">亲属2</div>
@@ -182,7 +191,7 @@
           v-model="relativeTwoName"
           name="relativeTwoName"
           label="姓名"
-          placeholder="请填写你的亲属姓名"
+          placeholder="亲属姓名"
           :rules="[{ required: true, message: '请填写你的亲属姓名' }]"
         />
         <van-field
@@ -191,7 +200,7 @@
           v-model="relativeTwoBetween"
           name="relativeTwoBetween"
           label="关系"
-          placeholder="请填写你和你亲属的关系"
+          placeholder="和你的关系"
           :rules="[{ required: true, message: '请填写你和你亲属的关系' }]"
         />
         <van-field
@@ -201,49 +210,41 @@
           name="relativeTwoPhone"
           label="手机号"
           type="number"
-          placeholder="请填写你亲属的手机号"
+          placeholder="填写手机号"
           :rules="[{ required: true, message: '请填写你亲属的手机号' }]"
         />
         <div class="intermidiate-title">同事1</div>
         <van-field
           class="text-all"
-          required
           v-model="colleagueOneName"
           name="colleagueOneName"
           label="姓名"
-          placeholder="请填写你的同事姓名"
-          :rules="[{ required: true, message: '请填写你的同事姓名' }]"
+          placeholder="同事姓名"
+          
         />
-
         <van-field
           class="text-all"
-          required
           v-model="colleagueOnePhone"
           name="colleagueOnePhone"
           label="手机号"
-          placeholder="请填写你同事的手机号"
+          placeholder="填写手机号"
           type="number"
-          :rules="[{ required: true, message: '请填写你同事的手机号' }]"
         />
         <div class="intermidiate-title">同事2</div>
         <van-field
           class="text-all"
-          required
           v-model="colleagueTwoName"
           name="colleagueTwoName"
           label="姓名"
-          placeholder="请填写你的同事姓名"
-          :rules="[{ required: true, message: '请填写你的同事姓名' }]"
+          placeholder="同事姓名"
         />
         <van-field
           class="text-all"
-          required
           v-model="colleagueTwoPhone"
           name="colleagueTwoPhone"
           label="手机号"
           type="number"
-          placeholder="请填写你同事的手机号"
-          :rules="[{ required: true, message: '请填写你同事的手机号' }]"
+          placeholder="填写手机号"
         />
         <div class="titlestyle">工作信息</div>
         <van-field
@@ -252,8 +253,8 @@
           v-model="companyname"
           name="companyname"
           label="工作单位"
-          placeholder="请填写你的工作单位"
-          :rules="[{ required: true, message: '请填写你的工作单位' }]"
+          placeholder="填写工作单位全称"
+          :rules="[{ required: true, message: '请填写你的工作单位全称' }]"
         />
         <van-field
           class="text-all"
@@ -261,7 +262,7 @@
           v-model="companytype"
           name="companytype"
           label="行业类别"
-          placeholder="请填写你的行业类别"
+          placeholder="填写行业类别"
           :rules="[{ required: true, message: '请填写你的行业类别' }]"
         />
         <van-field
@@ -270,7 +271,7 @@
           required
           name="companysector"
           label="部门"
-          placeholder="请填写你所在的部门"
+          placeholder="填写你所在部门"
           :rules="[{ required: true, message: '请填写你所在的部门' }]"
         />
         <van-field
@@ -279,7 +280,7 @@
           required
           name="companyposition"
           label="职位"
-          placeholder="请填写你的职位"
+          placeholder="填写你的职位"
           :rules="[{ required: true, message: '请填写你的职位' }]"
         />
         <van-field
@@ -315,9 +316,9 @@
           v-model="leaderName"
           required
           name="leaderName"
-          label="老板/领导姓名"
-          placeholder="请填写你的老板/领导姓名"
-          :rules="[{ required: true, message: '请填写你的老板/领导姓名' }]"
+          label="直属领导"
+          placeholder="填写你的老板/直属领导姓名"
+          :rules="[{ required: true, message: '填写你的老板/直属领导姓名' }]"
         />
         <van-field
           class="text-all"
@@ -328,7 +329,7 @@
           is-link
           readonly
           label="公司规模"
-          placeholder="请选择你的公司规模"
+          placeholder="选择你的公司规模"
           :rules="[{ required: true, message: '请选择你的公司规模' }]"
         />
         <van-popup
@@ -349,8 +350,8 @@
           name="monthSalary"
           label="月薪"
           type="number"
-          placeholder="请填写你的月薪"
-          :rules="[{ required: true, message: '请填写你的月薪' }]"
+          placeholder="填写你的月收入"
+          :rules="[{ required: true, message: '请填写你的月收入' }]"
         />
         <van-field
           class="text-all"
@@ -361,7 +362,7 @@
           is-link
           readonly
           label="发薪形式"
-          placeholder="请选择你的发薪形式"
+          placeholder="选择你的发薪形式"
           :rules="[{ required: true, message: '请选择你的发薪形式' }]"
         />
         <van-popup
@@ -384,7 +385,7 @@
           is-link
           readonly
           label="发薪日"
-          placeholder="请选择你的发薪日"
+          placeholder="选择你的发薪日"
           :rules="[{ required: true, message: '请选择你的发薪日' }]"
         />
         <van-popup
@@ -404,8 +405,8 @@
           required
           name="companyAdress"
           label="公司地址"
-          placeholder="请填写你公司的地址"
-          :rules="[{ required: true, message: '请填写你公司的地址' }]"
+          placeholder="填写你公司的详细地址"
+          :rules="[{ required: true, message: '填写你公司的详细地址' }]"
         />
         <van-field
           class="text-all"
@@ -413,8 +414,8 @@
           required
           name="companyPhoneNumber"
           label="单位座机"
-          placeholder="请填写你公司的座机号码"
-          :rules="[{ required: true, message: '请填写你公司的座机号码' }]"
+          placeholder="填写你单位的座机号码"
+          :rules="[{ required: true, message: '填写你单位的座机号码' }]"
         />
         <van-field
           class="text-all"
@@ -422,8 +423,8 @@
           required
           name="commuteTime"
           label="上下班时间"
-          placeholder="请填写你的上下班时间"
-          :rules="[{ required: true, message: '请填写你的上下班时间' }]"
+          placeholder="填写你的工作上下班时间"
+          :rules="[{ required: true, message: '填写你的工作上下班时间' }]"
         />
         <div class="titlestyle">备注</div>
         <van-field
@@ -540,6 +541,7 @@ export default {
       showPickerMaritalStatus.value = false;
     };
     const debt = ref("");
+    const repayMonths = ref("");
     //城市
     const presentAddress = ref("");
     const showArea = ref(false);
@@ -653,6 +655,7 @@ export default {
       onConfirmMaritalStatus,
       showPickerMaritalStatus,
       debt,
+      repayMonths,
       showArea,
       onConfirmArea,
       presentAddress,
@@ -731,7 +734,7 @@ export default {
 }
 .text-all {
   padding-top: 10px;
-  font-size: 18px;
+  font-size: 14px;
 }
 .loading {
   margin-top: 200px;
