@@ -3,6 +3,40 @@
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <div class="titleHeadstyle">补充资料填写</div>
+        <div class="titlestyle">客户基本信息</div>
+        <van-field
+          class="text-all"
+          label="申请人"
+          :model-value="$route.query.clientName"
+          readonly
+        />
+        <van-field
+          class="text-all"
+          label="身份证号"
+          :model-value="$route.query.identityCard"
+          readonly
+        />
+        <van-field
+          class="text-all"
+          label="申请金额"
+          :model-value="$route.query.assessMoney"
+          readonly
+        />
+        <van-field
+          class="text-all"
+          label="分期展示"
+          model-value="暂时没有数据"
+          readonly
+        />
+        <div class="uploadPicturesTitle">上传身份证正反面照片（一共2张）</div>
+        <van-uploader
+          class="UploaderPicture"
+          v-model="fileListIdentity"
+          multiple
+          :max-size="500 * 1024"
+          :max-count="2"
+          @oversize="onOversize"
+        />
         <div class="titlestyle">个人信息</div>
         <van-field
           class="text-all"
@@ -59,7 +93,7 @@
           placeholder="填写你的目前总负债（除本笔）"
           :rules="[{ required: true, message: '填写你的目前总负债' }]"
         />
-         <van-field
+        <van-field
           class="text-all"
           v-model="repayMonths"
           required
@@ -220,7 +254,6 @@
           name="colleagueOneName"
           label="姓名"
           placeholder="同事姓名"
-          
         />
         <van-field
           class="text-all"
@@ -426,14 +459,40 @@
           placeholder="填写你的工作上下班时间"
           :rules="[{ required: true, message: '填写你的工作上下班时间' }]"
         />
+        <div class="uploadPicturesTitle">请上传工作证明照片（1张）</div>
+        <van-uploader
+          class="UploaderPicture"
+          v-model="fileListWork"
+          multiple
+          :max-size="500 * 1024"
+          :max-count="1"
+        />
+        <div class="uploadPicturesTitle">请上传你的社保/公积金证明照片</div>
+        <van-uploader
+          class="UploaderPicture"
+          v-model="fileListSocialSecurity"
+          multiple
+          :max-size="500 * 1024"
+          :max-count="2"
+        />
+        <div class="uploadPicturesTitle">请上传你的其他证明文件</div>
+        <van-uploader
+          class="UploaderPicture"
+          v-model="fileListOther"
+          multiple
+          :max-size="500 * 1024"
+          :max-count="2"
+        />
         <div class="titlestyle">备注</div>
         <van-field
           v-model="remark"
           name="remark"
           autosize
-          class="remark_style"
+          class="custom-textarea"
           maxlength="1000"
           type="textarea"
+          :border="true"
+          show-word-limit
           placeholder="请输入备注"
         />
         <div class="buttom-title">请仔细检查，确认无误，提交之后不可更改</div>
@@ -466,7 +525,7 @@ const areaList = require("../assets/area.json");
 export default {
   setup() {
     const router = useRouter();
-    const datePrevious = router.currentRoute._rawValue.query;
+    const datePrevious = router.currentRoute.value.query || {};
     const loadFlag = ref(false);
     const isButtonDisabled = ref(false);
     const onSubmit = (values) => {
@@ -475,7 +534,7 @@ export default {
         // 执行你的逻辑
         let obj = {
           ...values,
-          clientId: datePrevious.id,
+          clientId: datePrevious.clientId,
         };
         console.log(obj);
         const formData = new FormData();
@@ -643,6 +702,15 @@ export default {
     const companyPhoneNumber = ref("");
     const commuteTime = ref("");
     const remark = ref("");
+    const fileListIdentity = ref([]);
+    const fileListWork = ref([]);
+    const fileListSocialSecurity = ref([]);
+    const fileListOther = ref([]);
+    const onOversize = (file) => {
+      console.log(file);
+      Toast("文件大小不能超过 500kb");
+    };
+
     return {
       loadFlag,
       onSubmit,
@@ -712,6 +780,11 @@ export default {
       remark,
       datePrevious,
       isButtonDisabled,
+      fileListIdentity,
+      fileListWork,
+      fileListSocialSecurity,
+      fileListOther,
+      onOversize,
     };
   },
 };
@@ -740,9 +813,24 @@ export default {
   margin-top: 200px;
 }
 .titlestyle {
-  font-size: 20px;
+  display: flex;
+  align-items: left;
+  font-size: 16px;
+  margin-left: 14px;
   margin-top: 30px;
   margin-bottom: 15px;
+}
+.uploadPicturesTitle {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+.UploaderPicture {
+  display: flex;
+  align-items: left;
+  margin-left: 15px;
 }
 .intermidiate-title {
   font-size: 14px;
@@ -756,8 +844,8 @@ export default {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 300px;
-  background-color:#FF8247;
-  border-color: #FF8247;
+  background-color: #ff8247;
+  border-color: #ff8247;
 }
 .loading {
   position: fixed;
@@ -766,5 +854,10 @@ export default {
   margin-left: -45px;
   margin-top: -80px;
   z-index: 1000;
+}
+.custom-textarea {
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 6px !important;
+  padding: 12px !important;
 }
 </style>
