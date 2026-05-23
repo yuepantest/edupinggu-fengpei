@@ -3,41 +3,9 @@
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <div class="titleHeadstyle">补充资料填写</div>
-        <div class="titlestyle">客户基本信息</div>
-        <van-field
-          class="text-all"
-          label="申请人"
-          :model-value="$route.query.clientName"
-          readonly
-        />
-        <van-field
-          class="text-all"
-          label="身份证号"
-          :model-value="$route.query.identityCard"
-          readonly
-        />
-        <van-field
-          class="text-all"
-          label="申请金额"
-          :model-value="$route.query.assessMoney"
-          readonly
-        />
-        <van-field
-          class="text-all"
-          label="分期展示"
-          model-value="暂时没有数据"
-          readonly
-        />
-        <div class="uploadPicturesTitle">上传身份证正反面照片（一共2张）</div>
-        <van-uploader
-          class="UploaderPicture"
-          v-model="fileListIdentity"
-          multiple
-          :max-size="500 * 1024"
-          :max-count="2"
-          @oversize="onOversize"
-        />
-        <div class="titlestyle">个人信息</div>
+        <div class="titlestyle">
+          个人信息，{{ datePrevious.clientName }}（{{ formattedIdCard(datePrevious.identityCard) }}）
+        </div>
         <van-field
           class="text-all"
           v-model="educationBackground"
@@ -459,23 +427,23 @@
           placeholder="填写你的工作上下班时间"
           :rules="[{ required: true, message: '填写你的工作上下班时间' }]"
         />
-        <div class="uploadPicturesTitle">请上传工作证明照片（1张）</div>
+        <div class="uploadPicturesTitle">上传工作证明</div>
         <van-uploader
           class="UploaderPicture"
           v-model="fileListWork"
           multiple
           :max-size="500 * 1024"
-          :max-count="1"
+          :max-count="2"
         />
-        <div class="uploadPicturesTitle">请上传你的社保/公积金证明照片</div>
+        <div class="uploadPicturesTitle">上传社保/公积金证明（可多传）</div>
         <van-uploader
           class="UploaderPicture"
           v-model="fileListSocialSecurity"
           multiple
           :max-size="500 * 1024"
-          :max-count="2"
+          :max-count="10"
         />
-        <div class="uploadPicturesTitle">请上传你的其他证明文件</div>
+        <div class="uploadPicturesTitle">上传其他资信材料（可多传）</div>
         <van-uploader
           class="UploaderPicture"
           v-model="fileListOther"
@@ -526,6 +494,13 @@ export default {
   setup() {
     const router = useRouter();
     const datePrevious = router.currentRoute.value.query || {};
+    // 计算属性来格式化身份证号码
+    const formattedIdCard = ((identityCard) => {
+      if (identityCard && identityCard.length === 18) {
+        return `${identityCard.slice(0, 6)}********${identityCard.slice(14)}`;
+      }
+      return identityCard || ""; // 如果身份证号不符合预期长度，或者没有值，返回空字符串
+    });
     const loadFlag = ref(false);
     const isButtonDisabled = ref(false);
     const onSubmit = (values) => {
@@ -784,6 +759,7 @@ export default {
       fileListWork,
       fileListSocialSecurity,
       fileListOther,
+      formattedIdCard,
       onOversize,
     };
   },
@@ -798,7 +774,7 @@ export default {
 .titleHeadstyle {
   font-size: 20px;
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .remark_style {
   padding-top: 10px;
@@ -809,16 +785,26 @@ export default {
   padding-top: 10px;
   font-size: 14px;
 }
+.text-personData {
+  display: flex;
+  align-items: left;
+  font-size: 14px;
+  margin-left: 14px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
 .loading {
   margin-top: 200px;
 }
 .titlestyle {
   display: flex;
   align-items: left;
-  font-size: 16px;
+  font-size: 14px;
   margin-left: 14px;
   margin-top: 30px;
   margin-bottom: 15px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .uploadPicturesTitle {
   margin-top: 15px;
