@@ -43,6 +43,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/FormOneJYD.vue')
   },
   {
+    path: '/FormOneXWD',
+    name: 'FormOneXWD',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/FormOneXWD.vue')
+  },
+  {
     path: '/FormTwoFPD',
     name: 'FormTwoFPD',
     // route level code-splitting
@@ -65,6 +73,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/FormTwoJYD.vue')
+  },
+   {
+    path: '/FormTwoXWD',
+    name: 'FormTwoXWD',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/FormTwoXWD.vue')
   },
   {
     path: '/FormTwo',

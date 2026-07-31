@@ -69,9 +69,8 @@ export default {
       });
     },
     toStartXWKD() {
-      //Toast("此功能还在开发中...");
       this.$router.push({
-        path: "/FormThree",
+        path: "/FormOneXWD",
         query: {},
       });
     },
