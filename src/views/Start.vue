@@ -29,7 +29,7 @@
     </div>
     <div class="center-text">
       <button round block class="bt" @click="toStartXWKD()">
-        小&nbsp;微&nbsp;快&nbsp;贷
+        菁&nbsp;英&nbsp;贷
       </button>
       <div>有营业执照6个月以上，公司有正常经营</div>
     </div>

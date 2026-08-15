@@ -17,7 +17,7 @@
     </div>
     <div v-if="!loadFlag">
       <div class="top_back">
-        <div class="text-img-text">小薇快贷</div>
+        <div class="text-img-text">菁英代</div>
         <img class="text-img-img" src="../assets/persion.png" />
       </div>
       <van-form @submit="onSubmit">

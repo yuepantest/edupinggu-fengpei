@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import 'vant/lib/index.css';
 import {
+    Dialog,
     Form,
     Field,
     CellGroup,
@@ -26,5 +27,6 @@ import {
 
 createApp(App).use(store).use(router)
     .use(Form).use(Field).use(Button).use(CellGroup).use(Area).use(Loading).use(RadioGroup).use(Radio)
-    .use(Popup).use(Checkbox).use(CheckboxGroup).use(Picker).use(DatetimePicker).use(Circle).use(Progress).use(Uploader)
+    .use(Popup).use(Checkbox).use(CheckboxGroup).use(Picker).use(DatetimePicker).use(Circle).use(Progress)
+    .use(Uploader).use(Dialog)
     .mount('#app')

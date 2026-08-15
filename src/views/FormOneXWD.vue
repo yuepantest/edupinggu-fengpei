@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top_back">
-      <div class="text-img-text">小微快贷</div>
+      <div class="text-img-text">菁英代</div>
       <img class="text-img-img" src="../assets/persion.png" />
     </div>
     <van-form @submit="onSubmit">
@@ -22,7 +22,7 @@
             ]"
           ></van-field>
         </div>
-
+        
         <van-field
           class="text-all"
           v-model="city"
